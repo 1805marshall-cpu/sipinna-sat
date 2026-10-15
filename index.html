@@ -113,16 +113,15 @@
             <img src="WhatsApp Image 2026-10-14 at 17.28.02 (1).jpeg" alt="Lema" class="h-7 object-contain hidden sm:block">
           </div>
           <span class="text-[11px] font-bold text-amber-300 mt-1 uppercase tracking-wider">
-            Director: Lic. Samuel Pucheta
           </span>
         </div>
 
-        <!-- Derecha: Usuario Activo y Salir -->
+        <!-- Derecha: Director Activo y Salir -->
         <div class="flex items-center gap-4">
           <div class="text-right hidden lg:block">
             <span class="block text-[10px] uppercase text-gray-400 tracking-wider">Sesión Activa</span>
             <span id="label-usuario-activo" class="text-xs font-extrabold text-amber-400 flex items-center gap-1">
-              <i class="fa-solid fa-circle-user text-amber-400"></i> Administrador
+              <i class="fa-solid fa-user-tie text-amber-400"></i> Lic. Samuel Pucheta - Director
             </span>
           </div>
           <button onclick="cerrarSesion()" class="text-xs bg-red-700 hover:bg-red-800 px-3.5 py-2 rounded-xl text-white font-bold flex items-center gap-2 transition shadow">
@@ -165,7 +164,7 @@
             <!-- Field 1: NNA -->
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <i class="fa-solid fa-child"></i> Field 1: Datos del Beneficiario (NNA)
+                <i class="fa-solid fa-child"></i> Datos del Beneficiario (NNA)
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-200">
                 <div>
@@ -195,7 +194,7 @@
             <!-- Field 2: Tutor y Canalización -->
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <i class="fa-solid fa-people-roof"></i> Field 2: Datos del Tutor y Canalización
+                <i class="fa-solid fa-people-roof"></i> Datos del Tutor y Canalización
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-200">
                 <div>
@@ -279,7 +278,7 @@
             <!-- Field 1: Datos del Evento -->
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <i class="fa-solid fa-landmark"></i> Field 1: Datos Generales de la Actividad
+                <i class="fa-solid fa-landmark"></i> Datos Generales de la Actividad
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-200">
                 <div>
@@ -308,7 +307,7 @@
             <!-- Field 2: Tabla Desglosada de Asistencia -->
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
-                <i class="fa-solid fa-users"></i> Field 2: Desglose de Asistencia por Criterio y Género
+                <i class="fa-solid fa-users"></i> Desglose de Asistencia por Criterio y Género
               </h3>
               <div class="overflow-x-auto border rounded-xl shadow-sm">
                 <table class="w-full text-sm text-left text-gray-600">
@@ -576,8 +575,7 @@
 
     window.addEventListener('DOMContentLoaded', () => {
       if (localStorage.getItem('sipinna_sesion') === 'activa') {
-        const userActivo = localStorage.getItem('sipinna_usuario_nombre') || 'Administrador';
-        document.getElementById('label-usuario-activo').textContent = userActivo;
+        document.getElementById('label-usuario-activo').innerHTML = '<i class="fa-solid fa-user-tie text-amber-400"></i> Lic. Samuel Pucheta - Director';
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('app-section').classList.remove('hidden');
         cargarDatosTabla();
@@ -635,8 +633,7 @@
 
       if (user === CREDENCIALES_SISTEMA.usuario && pass === CREDENCIALES_SISTEMA.password) {
         localStorage.setItem('sipinna_sesion', 'activa');
-        localStorage.setItem('sipinna_usuario_nombre', user);
-        document.getElementById('label-usuario-activo').textContent = user;
+        document.getElementById('label-usuario-activo').innerHTML = '<i class="fa-solid fa-user-tie text-amber-400"></i> Lic. Samuel Pucheta - Director';
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('app-section').classList.remove('hidden');
         cargarDatosTabla();
@@ -647,7 +644,6 @@
 
     window.cerrarSesion = function() {
       localStorage.removeItem('sipinna_sesion');
-      localStorage.removeItem('sipinna_usuario_nombre');
       document.getElementById('app-section').classList.add('hidden');
       document.getElementById('login-section').classList.remove('hidden');
     };
