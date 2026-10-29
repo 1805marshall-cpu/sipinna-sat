@@ -1,0 +1,41 @@
+:root {
+  --vino-sipinna: #7c1c30;
+  --vino-hover: #5d1423;
+  --dorado-sipinna: #c5a059;
+  --dorado-light: #f9f5ed;
+}
+.bg-vino { background-color: var(--vino-sipinna); }
+.bg-vino-hover:hover { background-color: var(--vino-hover); }
+.text-vino { color: var(--vino-sipinna); }
+.border-vino { border-color: var(--vino-sipinna); }
+
+.active-tab { 
+  border-bottom: 4px solid var(--vino-sipinna); 
+  color: var(--vino-sipinna); 
+  font-weight: 800; 
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-modal { animation: fadeIn 0.2s ease-out forwards; }
+
+/* ESTILOS DE IMPRESIÓN LIMPIA */
+@media print {
+  body * { display: none !important; }
+  #seccion-impresion-activa, #seccion-impresion-activa * { display: block !important; visibility: visible !important; }
+  #seccion-impresion-activa {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    background: white !important;
+    color: black !important;
+    padding: 10px !important;
+    margin: 0 !important;
+  }
+  table { width: 100% !important; border-collapse: collapse !important; }
+  th, td { border: 1px solid #cbd5e1 !important; padding: 6px 8px !important; font-size: 11px !important; text-align: left !important; }
+  th { background-color: #f1f5f9 !important; color: #0f172a !important; font-weight: bold !important; text-transform: uppercase !important; }
+}
