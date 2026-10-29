@@ -142,6 +142,9 @@
           <button id="tab-btn-2" onclick="switchTab('tab-2')" class="py-4 px-3 text-gray-500 hover:text-vino flex items-center gap-2 text-sm whitespace-nowrap transition">
             <i class="fa-solid fa-chalkboard-user text-base"></i> 2. Talleres y Conferencias
           </button>
+          <button id="tab-btn-3" onclick="switchTab('tab-3')" class="py-4 px-3 text-gray-500 hover:text-vino flex items-center gap-2 text-sm whitespace-nowrap transition">
+            <i class="fa-solid fa-chart-pie text-base"></i> 3. Cortes y Estadísticas
+          </button>
         </nav>
       </div>
     </div>
@@ -167,6 +170,26 @@
           <form id="form-caso" onsubmit="window.guardarCaso(event)" class="space-y-6">
             <input type="hidden" id="c-id-editar" value="">
             
+            <div>
+              <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-open"></i> Datos de Control Interno
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-amber-50/50 p-4 rounded-xl border border-amber-200">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">No. de Incremento</label>
+                  <input type="text" id="c-incremento" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white font-mono font-bold focus:ring-2 focus:ring-red-900 outline-none" placeholder="Ej. 001">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Fecha de Captura</label>
+                  <input type="date" id="c-fechacaptura" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-red-900 outline-none">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">No. De Expediente</label>
+                  <input type="text" id="c-noexp" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white font-mono font-bold text-gray-800 focus:ring-2 focus:ring-red-900 outline-none" placeholder="EXP-2026-001">
+                </div>
+              </div>
+            </div>
+
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
                 <i class="fa-solid fa-child"></i> Datos del Beneficiario (NNA)
@@ -226,15 +249,21 @@
                   <input type="tel" id="c-telefono" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none">
                 </div>
                 <div>
-                  <label class="block text-xs font-semibold text-gray-600 mb-1">Tema</label>
+                  <label class="block text-xs font-semibold text-gray-600 mb-1">Tema / Asunto</label>
                   <input type="text" id="c-tema" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none" placeholder="Motivo de atención">
                 </div>
                 <div>
                   <label class="block text-xs font-semibold text-gray-600 mb-1">Referencia / Canalización</label>
                   <select id="c-referencia" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none">
+                    <option value="">Seleccione dependencia...</option>
+                    <option value="Psicologia">Psicología</option>
                     <option value="Procuraduria">Procuraduría</option>
+                    <option value="Instituto de la Mujer">Instituto de la Mujer</option>
+                    <option value="Instituto de la Juventud">Instituto de la Juventud</option>
                     <option value="Fiscalia">Fiscalía</option>
-                    <option value="DIF-Psicologia">DIF - Psicología</option>
+                    <option value="Policia Municipal">Policía Municipal</option>
+                    <option value="Identidad y Convivencia">Identidad y Convivencia</option>
+                    <option value="CECOSAMA">CECOSAMA</option>
                     <option value="Otro">Otra Instancia</option>
                   </select>
                 </div>
@@ -247,11 +276,7 @@
                     <option value="Cancelado">Cancelado</option>
                   </select>
                 </div>
-                <div>
-                  <label class="block text-xs font-semibold text-gray-600 mb-1">No. De Expediente</label>
-                  <input type="text" id="c-noexp" required class="w-full border rounded-lg px-3 py-2 text-sm font-mono font-bold text-gray-800 focus:ring-2 focus:ring-red-900 outline-none" placeholder="EXP-2026-001">
-                </div>
-                <div class="md:col-span-2">
+                <div class="md:col-span-3">
                   <label class="block text-xs font-semibold text-gray-600 mb-1">Fotografías / Evidencias (Opcional)</label>
                   <input type="file" id="c-fotos" multiple accept="image/*" class="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-red-50 file:text-vino hover:file:bg-red-100 cursor-pointer">
                   <div id="contenedor-fotos-actuales" class="mt-3 hidden">
@@ -291,6 +316,22 @@
             
             <div>
               <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
+                <i class="fa-solid fa-folder-open"></i> Datos de Control Interno
+              </h3>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 bg-amber-50/50 p-4 rounded-xl border border-amber-200">
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">No. de Incremento</label>
+                  <input type="text" id="tll-incremento" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white font-mono font-bold focus:ring-2 focus:ring-red-900 outline-none" placeholder="Ej. 001">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-700 mb-1">Fecha de Captura</label>
+                  <input type="date" id="tll-fechacaptura" required class="w-full border rounded-lg px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-red-900 outline-none">
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
                 <i class="fa-solid fa-landmark"></i> Datos Generales de la Actividad
               </h3>
               <div class="grid grid-cols-1 md:grid-cols-4 gap-4 bg-slate-50 p-4 rounded-xl border border-gray-200">
@@ -310,9 +351,24 @@
                   <label class="block text-xs font-semibold text-gray-600 mb-1">Fecha de Actividad</label>
                   <input type="date" id="tll-fecha" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none">
                 </div>
-                <div class="md:col-span-2">
+                <div>
                   <label class="block text-xs font-semibold text-gray-600 mb-1">Población / Tipo de Asistentes</label>
                   <input type="text" id="tll-poblacion" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none" placeholder="Ej. Estudiantes y Docentes">
+                </div>
+                <div>
+                  <label class="block text-xs font-semibold text-gray-600 mb-1">Referencia / Dependencia Implicada</label>
+                  <select id="tll-referencia" required class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-red-900 outline-none bg-white">
+                    <option value="">Seleccione dependencia...</option>
+                    <option value="Psicologia">Psicología</option>
+                    <option value="Procuraduria">Procuraduría</option>
+                    <option value="Instituto de la Mujer">Instituto de la Mujer</option>
+                    <option value="Instituto de la Juventud">Instituto de la Juventud</option>
+                    <option value="Fiscalia">Fiscalía</option>
+                    <option value="Policia Municipal">Policía Municipal</option>
+                    <option value="Identidad y Convivencia">Identidad y Convivencia</option>
+                    <option value="CECOSAMA">CECOSAMA</option>
+                    <option value="Otro">Otra Instancia</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -404,9 +460,98 @@
         </div>
       </section>
 
+      <!-- PESTAÑA 3: CORTES Y ESTADÍSTICAS -->
+      <section id="tab-3" class="tab-content hidden space-y-6">
+        <div class="bg-white p-6 rounded-2xl shadow-md border border-gray-100 space-y-6">
+          <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b pb-4">
+            <div>
+              <h2 class="text-base font-bold text-gray-800 flex items-center gap-2">
+                <i class="fa-solid fa-chart-pie text-vino"></i> Módulo de Cortes y Estadísticas (Por Fecha de Captura)
+              </h2>
+              <p class="text-xs text-gray-500 mt-0.5">Genera cortes oficiales diarios, semanales, mensuales y anuales.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="exportarCorteEstadisticoExcel()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-file-excel"></i> Exportar Corte Excel
+              </button>
+              <button onclick="imprimirCorteEstadistico()" class="bg-slate-800 hover:bg-slate-900 text-white font-bold text-xs px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 shadow">
+                <i class="fa-solid fa-print"></i> Imprimir Corte
+              </button>
+            </div>
+          </div>
+
+          <!-- Controles de Filtro de Cortes -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border">
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1">Tipo de Corte</label>
+              <select id="corte-tipo" onchange="cambiarTipoCorte()" class="w-full border rounded-lg px-3 py-2 text-xs font-bold bg-white text-vino outline-none">
+                <option value="diario">Diario</option>
+                <option value="semanal">Semanal</option>
+                <option value="mensual" selected>Mensual</option>
+                <option value="anual">Anual</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-gray-700 mb-1" id="label-selector-corte">Seleccionar Periodo / Mes</label>
+              <!-- Contenedor dinámico del selector según el tipo -->
+              <div id="contenedor-input-corte">
+                <input type="month" id="corte-valor-mes" onchange="calcularCorteEstadistico()" class="w-full border rounded-lg px-3 py-2 text-xs bg-white outline-none">
+              </div>
+            </div>
+            <div class="flex items-end">
+              <button onclick="calcularCorteEstadistico()" class="w-full bg-vino bg-vino-hover text-white text-xs font-bold py-2 px-4 rounded-lg transition shadow">
+                <i class="fa-solid fa-rotate mr-1"></i> Generar Corte
+              </button>
+            </div>
+          </div>
+
+          <!-- Tarjetas de Resumen / KPIs -->
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="bg-amber-50 border border-amber-200 p-4 rounded-xl text-center shadow-sm">
+              <span class="block text-[10px] uppercase font-bold text-amber-800">Total Expedientes NNA</span>
+              <span id="kpi-total-nna" class="text-2xl font-black text-amber-900">0</span>
+            </div>
+            <div class="bg-red-50 border border-red-200 p-4 rounded-xl text-center shadow-sm">
+              <span class="block text-[10px] uppercase font-bold text-red-800">Total Talleres / Actividades</span>
+              <span id="kpi-total-talleres" class="text-2xl font-black text-red-900">0</span>
+            </div>
+            <div class="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center shadow-sm">
+              <span class="block text-[10px] uppercase font-bold text-slate-700">Asistentes Hombres</span>
+              <span id="kpi-total-h" class="text-2xl font-black text-slate-900">0</span>
+            </div>
+            <div class="bg-indigo-50 border border-indigo-200 p-4 rounded-xl text-center shadow-sm">
+              <span class="block text-[10px] uppercase font-bold text-indigo-800">Asistentes Mujeres</span>
+              <span id="kpi-total-m" class="text-2xl font-black text-indigo-900">0</span>
+            </div>
+          </div>
+
+          <!-- Tabla de Desglose por Canalización / Dependencia -->
+          <div>
+            <h3 class="text-xs font-extrabold text-vino uppercase tracking-wider mb-3 flex items-center gap-1.5">
+              <i class="fa-solid fa-list-check"></i> Desglose de Registros por Dependencia / Canalización
+            </h3>
+            <div class="overflow-x-auto border rounded-xl">
+              <table class="w-full text-sm text-left text-gray-600">
+                <thead class="text-xs text-gray-700 uppercase bg-slate-100 border-b">
+                  <tr>
+                    <th class="px-4 py-3">Dependencia / Canalización</th>
+                    <th class="px-4 py-3 text-center">Expedientes NNA</th>
+                    <th class="px-4 py-3 text-center">Talleres Impartidos</th>
+                    <th class="px-4 py-3 text-center">Total General Atendidos</th>
+                  </tr>
+                </thead>
+                <tbody id="tabla-corte-body" class="divide-y">
+                  <tr><td colspan="4" class="text-center py-6 text-gray-400">Seleccione un periodo y presione Generar Corte.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <!-- ==================== TABLA GENERAL DE REGISTROS ==================== -->
       <section class="bg-white p-6 rounded-2xl shadow-md border border-gray-100">
-        <!-- SECCIÓN SUPERIOR ORDENADA -->
         <div class="flex flex-col gap-4 mb-6 pb-4 border-b">
           
           <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
@@ -582,6 +727,10 @@
     let fotosActualesEdicion = [];
     let listasActualesEdicion = [];
 
+    // Caché global para la pestaña de cortes
+    let cacheCasosEstadistica = [];
+    let cacheTalleresEstadistica = [];
+
     function comprimirImagen(file, maxWidth = 400, quality = 0.4) {
       return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -621,12 +770,18 @@
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('app-section').classList.remove('hidden');
         cargarDatosTabla();
+        cargarDatosEstadisticas();
       }
 
       const fechaHoy = new Date();
       const anio = fechaHoy.getFullYear();
       const mes = String(fechaHoy.getMonth() + 1).padStart(2, '0');
+      const diaHoy = `${anio}-${mes}-${String(fechaHoy.getDate()).padStart(2, '0')}`;
+      
+      document.getElementById('c-fechacaptura').value = diaHoy;
+      document.getElementById('tll-fechacaptura').value = diaHoy;
       document.getElementById('filtro-mes').value = `${anio}-${mes}`;
+      document.getElementById('corte-valor-mes').value = `${anio}-${mes}`;
     });
 
     window.mostrarNotificacion = function(titulo, mensaje, tipo = 'exito') {
@@ -678,6 +833,7 @@
         document.getElementById('login-section').classList.add('hidden');
         document.getElementById('app-section').classList.remove('hidden');
         cargarDatosTabla();
+        cargarDatosEstadisticas();
       } else {
         mostrarNotificacion('Acceso Denegado', 'Usuario o contraseña incorrectos.', 'error');
       }
@@ -686,6 +842,7 @@
     window.cerrarSesion = function() {
       localStorage.removeItem('sipinna_sesion');
       document.getElementById('app-section').classList.add('hidden');
+      document.getElementById('login-section').classList.add('hidden');
       document.getElementById('login-section').classList.remove('hidden');
     };
 
@@ -713,6 +870,8 @@
         const fotosFinales = [...fotosActualesEdicion, ...nuevasFotosComprimidas];
 
         let datos = {
+          noIncremento: document.getElementById('c-incremento').value,
+          fechaCaptura: document.getElementById('c-fechacaptura').value,
           nombreNna: document.getElementById('c-nombre').value,
           fechaNac: document.getElementById('c-fechanac').value,
           edadNna: document.getElementById('c-edad').value,
@@ -740,6 +899,7 @@
         
         cancelarEdicionCaso();
         cargarDatosTabla();
+        cargarDatosEstadisticas();
       } catch (err) {
         console.error("Error al guardar caso:", err);
         mostrarNotificacion('Error de Guardado', 'Las fotos son demasiado pesadas para Firestore.', 'error');
@@ -754,6 +914,8 @@
       if (!item) return;
 
       document.getElementById('c-id-editar').value = item.id;
+      document.getElementById('c-incremento').value = item.noIncremento || '';
+      document.getElementById('c-fechacaptura').value = item.fechaCaptura || '';
       document.getElementById('c-nombre').value = item.nombreNna || '';
       document.getElementById('c-fechanac').value = item.fechaNac || '';
       calcularEdadNNA();
@@ -811,6 +973,11 @@
       document.getElementById('titulo-form-caso').textContent = 'Nuevo Registro de Atención (NNA)';
       document.getElementById('btn-guardar-caso').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Guardar Expediente NNA';
       document.getElementById('btn-cancelar-edicion-caso').classList.add('hidden');
+      
+      const fechaHoy = new Date();
+      const anio = fechaHoy.getFullYear();
+      const mes = String(fechaHoy.getMonth() + 1).padStart(2, '0');
+      document.getElementById('c-fechacaptura').value = `${anio}-${mes}-${String(fechaHoy.getDate()).padStart(2, '0')}`;
     };
 
     window.calcularTotalesAsistencia = function() {
@@ -860,11 +1027,14 @@
         });
 
         let datos = {
+          noIncremento: document.getElementById('tll-incremento').value,
+          fechaCaptura: document.getElementById('tll-fechacaptura').value,
           tema: document.getElementById('tll-tema').value,
           institucion: document.getElementById('tll-institucion').value,
           lugar: document.getElementById('tll-lugar').value,
           fechaActividad: document.getElementById('tll-fecha').value,
           poblacion: document.getElementById('tll-poblacion').value,
+          referencia: document.getElementById('tll-referencia').value,
           totalHombres: document.getElementById('tot-hombres').textContent,
           totalMujeres: document.getElementById('tot-mujeres').textContent,
           granTotal: document.getElementById('gran-total').textContent,
@@ -884,6 +1054,7 @@
 
         cancelarEdicionTaller();
         cargarDatosTabla();
+        cargarDatosEstadisticas();
       } catch (err) {
         console.error("Error al guardar taller:", err);
         mostrarNotificacion('Error de Guardado', 'No se pudo guardar el taller en Firestore.', 'error');
@@ -898,11 +1069,14 @@
       if (!item) return;
 
       document.getElementById('tll-id-editar').value = item.id;
+      document.getElementById('tll-incremento').value = item.noIncremento || '';
+      document.getElementById('tll-fechacaptura').value = item.fechaCaptura || '';
       document.getElementById('tll-tema').value = item.tema || '';
       document.getElementById('tll-institucion').value = item.institucion || '';
       document.getElementById('tll-lugar').value = item.lugar || '';
       document.getElementById('tll-fecha').value = item.fechaActividad || '';
       document.getElementById('tll-poblacion').value = item.poblacion || '';
+      document.getElementById('tll-referencia').value = item.referencia || '';
 
       fotosActualesEdicion = item.fotos || [];
       listasActualesEdicion = item.listas || [];
@@ -984,16 +1158,27 @@
       document.getElementById('titulo-form-taller').textContent = 'Registro de Talleres, Escuelas y Conferencias';
       document.getElementById('btn-guardar-taller').innerHTML = '<i class="fa-solid fa-floppy-disk"></i> Registrar Actividad / Taller';
       document.getElementById('btn-cancelar-edicion-taller').classList.add('hidden');
+      
+      const fechaHoy = new Date();
+      const anio = fechaHoy.getFullYear();
+      const mes = String(fechaHoy.getMonth() + 1).padStart(2, '0');
+      document.getElementById('tll-fechacaptura').value = `${anio}-${mes}-${String(fechaHoy.getDate()).padStart(2, '0')}`;
     };
 
     window.switchTab = function(tabId) {
       document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
       document.getElementById(tabId).classList.remove('hidden');
 
-      ['tab-btn-1', 'tab-btn-2'].forEach(id => {
-        document.getElementById(id).className = 'py-4 px-3 text-gray-500 hover:text-vino flex items-center gap-2 text-sm whitespace-nowrap transition';
+      ['tab-btn-1', 'tab-btn-2', 'tab-btn-3'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.className = 'py-4 px-3 text-gray-500 hover:text-vino flex items-center gap-2 text-sm whitespace-nowrap transition';
       });
-      document.getElementById(`tab-btn-${tabId.split('-')[1]}`).className = 'py-4 px-3 active-tab flex items-center gap-2 text-sm whitespace-nowrap transition';
+      const activeBtn = document.getElementById(`tab-btn-${tabId.split('-')[1]}`);
+      if (activeBtn) activeBtn.className = 'py-4 px-3 active-tab flex items-center gap-2 text-sm whitespace-nowrap transition';
+
+      if (tabId === 'tab-3') {
+        calcularCorteEstadistico();
+      }
     };
 
     window.cambiarModuloTabla = function() {
@@ -1036,6 +1221,247 @@
       }
     };
 
+    window.cargarDatosEstadisticas = async function() {
+      try {
+        const snapCasos = await getDocs(collection(db, "casos_nna"));
+        cacheCasosEstadistica = [];
+        snapCasos.forEach(d => cacheCasosEstadistica.push(d.data()));
+
+        const snapTalleres = await getDocs(collection(db, "actividades_talleres"));
+        cacheTalleresEstadistica = [];
+        snapTalleres.forEach(d => cacheTalleresEstadistica.push(d.data()));
+
+        calcularCorteEstadistico();
+      } catch (e) {
+        console.error("Error al cargar datos para estadísticas:", e);
+      }
+    };
+
+    window.cambiarTipoCorte = function() {
+      const tipo = document.getElementById('corte-tipo').value;
+      const contenedor = document.getElementById('contenedor-input-corte');
+      const label = document.getElementById('label-selector-corte');
+      const fechaHoy = new Date();
+      const anio = fechaHoy.getFullYear();
+      const mes = String(fechaHoy.getMonth() + 1).padStart(2, '0');
+      const dia = String(fechaHoy.getDate()).padStart(2, '0');
+
+      if (tipo === 'diario') {
+        label.textContent = "Seleccionar Día";
+        contenedor.innerHTML = `<input type="date" id="corte-valor-fecha" onchange="calcularCorteEstadistico()" value="${anio}-${mes}-${dia}" class="w-full border rounded-lg px-3 py-2 text-xs bg-white outline-none">`;
+      } else if (tipo === 'semanal') {
+        label.textContent = "Seleccionar Semana (Cualquier día de la semana)";
+        contenedor.innerHTML = `<input type="date" id="corte-valor-semana" onchange="calcularCorteEstadistico()" value="${anio}-${mes}-${dia}" class="w-full border rounded-lg px-3 py-2 text-xs bg-white outline-none">`;
+      } else if (tipo === 'mensual') {
+        label.textContent = "Seleccionar Mes";
+        contenedor.innerHTML = `<input type="month" id="corte-valor-mes" onchange="calcularCorteEstadistico()" value="${anio}-${mes}" class="w-full border rounded-lg px-3 py-2 text-xs bg-white outline-none">`;
+      } else if (tipo === 'anual') {
+        label.textContent = "Seleccionar Año";
+        contenedor.innerHTML = `<input type="number" id="corte-valor-anio" onchange="calcularCorteEstadistico()" value="${anio}" min="2024" max="2035" class="w-full border rounded-lg px-3 py-2 text-xs bg-white outline-none">`;
+      }
+      calcularCorteEstadistico();
+    };
+
+    window.calcularCorteEstadistico = function() {
+      const tipo = document.getElementById('corte-tipo').value;
+      let filtroVal = '';
+
+      if (tipo === 'diario') {
+        const el = document.getElementById('corte-valor-fecha');
+        if (el) filtroVal = el.value;
+      } else if (tipo === 'semanal') {
+        const el = document.getElementById('corte-valor-semana');
+        if (el) filtroVal = el.value;
+      } else if (tipo === 'mensual') {
+        const el = document.getElementById('corte-valor-mes');
+        if (el) filtroVal = el.value;
+      } else if (tipo === 'anual') {
+        const el = document.getElementById('corte-valor-anio');
+        if (el) filtroVal = el.value;
+      }
+
+      // Filtrar Casos NNA por fechaCaptura
+      let casosFiltrados = cacheCasosEstadistica.filter(item => {
+        const fCap = item.fechaCaptura || '';
+        if (!fCap) return false;
+        if (tipo === 'diario') return fCap === filtroVal;
+        if (tipo === 'mensual') return fCap.startsWith(filtroVal);
+        if (tipo === 'anual') return fCap.startsWith(filtroVal);
+        if (tipo === 'semanal' && filtroVal) {
+          // Lógica de semana (7 días contados desde el lunes o diferencia de tiempo)
+          const dRef = new Date(filtroVal);
+          const dItem = new Date(fCap);
+          const diffTime = Math.abs(dItem - dRef);
+          const diffDays = diffTime / (1000 * 60 * 60 * 24);
+          return diffDays <= 3 && dItem <= new Date(dRef.getTime() + 3*86400000) && dItem >= new Date(dRef.getTime() - 3*86400000);
+        }
+        return false;
+      });
+
+      // Filtrar Talleres por fechaCaptura
+      let talleresFiltrados = cacheTalleresEstadistica.filter(item => {
+        const fCap = item.fechaCaptura || '';
+        if (!fCap) return false;
+        if (tipo === 'diario') return fCap === filtroVal;
+        if (tipo === 'mensual') return fCap.startsWith(filtroVal);
+        if (tipo === 'anual') return fCap.startsWith(filtroVal);
+        if (tipo === 'semanal' && filtroVal) {
+          const dRef = new Date(filtroVal);
+          const dItem = new Date(fCap);
+          const diffTime = Math.abs(dItem - dRef);
+          const diffDays = diffTime / (1000 * 60 * 60 * 24);
+          return diffDays <= 3;
+        }
+        return false;
+      });
+
+      // Calcular KPIs
+      let totalNna = casosFiltrados.length;
+      let totalTalleres = talleresFiltrados.length;
+      let totalH = 0;
+      let totalM = 0;
+
+      talleresFiltrados.forEach(t => {
+        totalH += parseInt(t.totalHombres) || 0;
+        totalM += parseInt(t.totalMujeres) || 0;
+      });
+
+      document.getElementById('kpi-total-nna').textContent = totalNna;
+      document.getElementById('kpi-total-talleres').textContent = totalTalleres;
+      document.getElementById('kpi-total-h').textContent = totalH;
+      document.getElementById('kpi-total-m').textContent = totalM;
+
+      // Desglose por Dependencia / Canalización
+      const dependencias = [
+        "Psicologia", "Procuraduria", "Instituto de la Mujer", 
+        "Instituto de la Juventud", "Fiscalia", "Policia Municipal", 
+        "Identidad y Convivencia", "CECOSAMA", "Otro"
+      ];
+
+      const tbodyCorte = document.getElementById('tabla-corte-body');
+      tbodyCorte.innerHTML = '';
+
+      let sumaGeneralAtendidos = 0;
+
+      dependencias.forEach(dep => {
+        const nnaDep = casosFiltrados.filter(c => c.referencia === dep).length;
+        const tallDep = talleresFiltrados.filter(t => t.referencia === dep).length;
+        
+        let asistentesDep = 0;
+        talleresFiltrados.filter(t => t.referencia === dep).forEach(t => {
+          asistentesDep += parseInt(t.granTotal) || 0;
+        });
+
+        const totalAtendidosDep = nnaDep + asistentesDep;
+        sumaGeneralAtendidos += totalAtendidosDep;
+
+        if (nnaDep > 0 || tallDep > 0) {
+          tbodyCorte.innerHTML += `
+            <tr class="hover:bg-slate-50">
+              <td class="px-4 py-2.5 font-bold text-slate-800">${dep}</td>
+              <td class="px-4 py-2.5 text-center">${nnaDep}</td>
+              <td class="px-4 py-2.5 text-center">${tallDep}</td>
+              <td class="px-4 py-2.5 text-center font-black text-vino">${totalAtendidosDep}</td>
+            </tr>`;
+        }
+      });
+
+      if (tbodyCorte.innerHTML === '') {
+        tbodyCorte.innerHTML = '<tr><td colspan="4" class="text-center py-6 text-gray-400">No hay registros para este periodo de captura.</td></tr>';
+      }
+    };
+
+    window.exportarCorteEstadisticoExcel = function() {
+      const tipo = document.getElementById('corte-tipo').value;
+      const wsData = [
+        ["REPORTE OFICIAL DE CORTE SIPINNA"],
+        [`Tipo de Corte: ${tipo.toUpperCase()}`],
+        [`Fecha Emisión: ${new Date().toLocaleDateString('es-MX')}`],
+        [],
+        ["Dependencia / Canalización", "Expedientes NNA", "Talleres Impartidos"]
+      ];
+
+      const filas = document.querySelectorAll('#tabla-corte-body tr');
+      filas.forEach(tr => {
+        const cols = tr.querySelectorAll('td');
+        if (cols.length === 4) {
+          wsData.push([cols[0].textContent, cols[1].textContent, cols[2].textContent]);
+        }
+      });
+
+      const ws = XLSX.utils.aoa_to_sheet(wsData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Corte_Estadistico");
+      XLSX.writeFile(wb, `SIPINNA_Corte_${tipo}_${new Date().toISOString().slice(0,10)}.xlsx`);
+    };
+
+    window.imprimirCorteEstadistico = function() {
+      const tipo = document.getElementById('corte-tipo').value;
+      const viejoContenedor = document.getElementById('seccion-impresion-activa');
+      if (viejoContenedor) viejoContenedor.remove();
+
+      const totalNna = document.getElementById('kpi-total-nna').textContent;
+      const totalTalleres = document.getElementById('kpi-total-talleres').textContent;
+      const totalH = document.getElementById('kpi-total-h').textContent;
+      const totalM = document.getElementById('kpi-total-m').textContent;
+
+      const divPrint = document.createElement('div');
+      divPrint.id = 'seccion-impresion-activa';
+      
+      let htmlRows = '';
+      const filas = document.querySelectorAll('#tabla-corte-body tr');
+      filas.forEach(tr => {
+        htmlRows += `<tr>${tr.innerHTML}</tr>`;
+      });
+
+      divPrint.innerHTML = `
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #7c1c30; padding-bottom: 8px; margin-bottom: 12px;">
+          <div>
+            <h3 style="font-size: 13px; font-weight: bold; margin: 0; text-transform: uppercase; color: #7c1c30;">H. Ayuntamiento de San Andrés Tuxtla, Ver.</h3>
+            <h4 style="font-size: 11px; font-weight: bold; margin: 2px 0; color: #333;">SIPINNA - Reporte de Corte Estadístico (${tipo.toUpperCase})</h4>
+          </div>
+          <div style="text-align: right; font-size: 10px;">
+            <p style="font-weight: bold; margin: 0;">Director: Lic. Samuel Pucheta</p>
+            <p style="margin: 2px 0; color: #555;">Emisión: ${new Date().toLocaleDateString('es-MX')}</p>
+          </div>
+        </div>
+
+        <div style="display: flex; justify-content: space-around; margin-bottom: 15px; font-size: 11px; background: #f8fafc; padding: 8px; border: 1px solid #cbd5e1;">
+          <div><strong>NNA:</strong> ${totalNna}</div>
+          <div><strong>Talleres:</strong> ${totalTalleres}</div>
+          <div><strong>Hombres:</strong> ${totalH}</div>
+          <div><strong>Mujeres:</strong> ${totalM}</div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Dependencia / Canalización</th>
+              <th style="text-align: center;">Expedientes NNA</th>
+              <th style="text-align: center;">Talleres</th>
+              <th style="text-align: center;">Total General</th>
+            </tr>
+          </thead>
+          <tbody>${htmlRows}</tbody>
+        </table>
+
+        <div style="margin-top: 40px; display: flex; justify-content: space-around; text-align: center; font-size: 10px;">
+          <div>
+            <div style="width: 180px; border-top: 1px solid black; margin: 0 auto 4px auto;"></div>
+            <strong>Lic. Samuel Pucheta</strong><br>Director de SIPINNA Municipal
+          </div>
+          <div>
+            <div style="width: 180px; border-top: 1px solid black; margin: 0 auto 4px auto;"></div>
+            <strong>Sello Oficial / Firma</strong><br>San Andrés Tuxtla, Ver.
+          </div>
+        </div>
+      `;
+
+      document.body.appendChild(divPrint);
+      window.print();
+      divPrint.remove();
+    };
+
     window.aplicarFiltrosYBusqueda = function() {
       const filtroDia = document.getElementById('filtro-dia').value;
       const filtroMes = document.getElementById('filtro-mes').value;
@@ -1045,6 +1471,9 @@
 
       if (filtroDia) {
         lista = lista.filter(item => {
+          if (item.fechaCaptura) {
+            return item.fechaCaptura === filtroDia;
+          }
           if (moduloActual === 'talleres') {
             return item.fechaActividad === filtroDia;
           } else {
@@ -1056,6 +1485,9 @@
         });
       } else if (filtroMes) {
         lista = lista.filter(item => {
+          if (item.fechaCaptura) {
+            return item.fechaCaptura.startsWith(filtroMes);
+          }
           if (moduloActual === 'talleres') {
             if (!item.fechaActividad) return false;
             return item.fechaActividad.startsWith(filtroMes);
@@ -1099,23 +1531,22 @@
       if (moduloActual === 'casos') {
         thead.innerHTML = `
           <tr>
-            <th class="px-4 py-3">No.</th>
-            <th class="px-4 py-3">Expediente / Tema</th>
+            <th class="px-4 py-3">No. Inc.</th>
+            <th class="px-4 py-3">Expediente / F. Captura</th>
             <th class="px-4 py-3">NNA / Tutor</th>
-            <th class="px-4 py-3">Estatus</th>
+            <th class="px-4 py-3">Canalización</th>
             <th class="px-4 py-3 text-center">Evidencias</th>
             <th class="px-4 py-3 text-center">Acciones</th>
           </tr>`;
 
-        registrosPagina.forEach((item, index) => {
-          const numReal = inicio + index + 1;
+        registrosPagina.forEach((item) => {
           const fotosJson = encodeURIComponent(JSON.stringify(item.fotos || []));
           tbody.innerHTML += `
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3 font-bold text-gray-700">${numReal}</td>
-              <td class="px-4 py-3 font-mono font-bold text-slate-800">${item.noExpediente || ''}<br><span class="text-xs text-gray-500 font-sans font-normal">${item.tema || ''}</span></td>
+              <td class="px-4 py-3 font-bold text-gray-700">${item.noIncremento || 'S/N'}</td>
+              <td class="px-4 py-3 font-mono font-bold text-slate-800">${item.noExpediente || ''}<br><span class="text-xs text-gray-500 font-sans font-normal">Cap: ${item.fechaCaptura || ''}</span></td>
               <td class="px-4 py-3 font-medium text-gray-900">${item.nombreNna || ''}<br><span class="text-xs text-gray-500">Tutor: ${item.nombreTutor || ''}</span></td>
-              <td class="px-4 py-3"><span class="bg-amber-100 text-amber-900 text-xs px-2.5 py-1 rounded-full font-bold">${item.estatus || ''}</span></td>
+              <td class="px-4 py-3"><span class="bg-amber-100 text-amber-900 text-xs px-2.5 py-1 rounded-full font-bold">${item.referencia || ''}</span></td>
               <td class="px-4 py-3 text-center">
                 <button onclick="abrirGaleria('${fotosJson}', 'Fotos del Expediente NNA')" class="text-vino text-xs font-bold underline hover:text-red-900"><i class="fa-solid fa-images mr-1"></i> ${(item.fotos || []).length} Fotos</button>
               </td>
@@ -1128,24 +1559,23 @@
       } else {
         thead.innerHTML = `
           <tr>
-            <th class="px-4 py-3">No.</th>
+            <th class="px-4 py-3">No. Inc.</th>
             <th class="px-4 py-3">Tema / Institución</th>
-            <th class="px-4 py-3">Lugar / Fecha</th>
+            <th class="px-4 py-3">Canalización / F. Captura</th>
             <th class="px-4 py-3 text-center">Asistentes</th>
             <th class="px-4 py-3 text-center">Evidencias Y Listas</th>
             <th class="px-4 py-3 text-center">Acciones</th>
           </tr>`;
 
-        registrosPagina.forEach((item, index) => {
-          const numReal = inicio + index + 1;
+        registrosPagina.forEach((item) => {
           const fotosJson = encodeURIComponent(JSON.stringify(item.fotos || []));
           const listasJson = encodeURIComponent(JSON.stringify(item.listas || []));
 
           tbody.innerHTML += `
             <tr class="hover:bg-slate-50 transition">
-              <td class="px-4 py-3 font-bold text-gray-700">${numReal}</td>
+              <td class="px-4 py-3 font-bold text-gray-700">${item.noIncremento || 'S/N'}</td>
               <td class="px-4 py-3 font-bold text-gray-900">${item.tema || ''}<br><span class="text-xs text-gray-500 font-normal">${item.institucion || ''}</span></td>
-              <td class="px-4 py-3 text-gray-700">${item.lugar || ''}<br><span class="text-xs text-gray-400">${item.fechaActividad || ''}</span></td>
+              <td class="px-4 py-3 text-gray-700">${item.referencia || 'General'}<br><span class="text-xs text-gray-400">Cap: ${item.fechaCaptura || ''}</span></td>
               <td class="px-4 py-3 text-center font-black text-vino">${item.granTotal || 0} <span class="text-xs font-normal text-gray-500">(${item.totalHombres || 0}H / ${item.totalMujeres || 0}M)</span></td>
               <td class="px-4 py-3 text-center space-y-1">
                 <button onclick="abrirGaleria('${fotosJson}', 'Fotografías del Taller')" class="block w-full text-vino text-xs font-bold underline hover:text-red-900">
@@ -1181,6 +1611,7 @@
           await deleteDoc(doc(db, coleccion, id));
           mostrarNotificacion('Registro Eliminado', 'El expediente fue removido correctamente.');
           cargarDatosTabla();
+          cargarDatosEstadisticas();
         } catch (e) {
           mostrarNotificacion('Error', 'No se pudo eliminar el registro.', 'error');
         }
@@ -1199,8 +1630,9 @@
       const etiquetaFiltro = filtroDia || filtroMes || 'General';
 
       if (moduloActual === 'casos') {
-        datosExportar = documentosFiltradosCache.map((item, idx) => ({
-          'No.': idx + 1,
+        datosExportar = documentosFiltradosCache.map((item) => ({
+          'No. Incremento': item.noIncremento || '',
+          'Fecha Captura': item.fechaCaptura || '',
           'No. Expediente': item.noExpediente || '',
           'Nombre NNA': item.nombreNna || '',
           'Fecha Nacimiento': item.fechaNac || '',
@@ -1216,13 +1648,15 @@
           'Estatus': item.estatus || ''
         }));
       } else {
-        datosExportar = documentosFiltradosCache.map((item, idx) => ({
-          'No.': idx + 1,
+        datosExportar = documentosFiltradosCache.map((item) => ({
+          'No. Incremento': item.noIncremento || '',
+          'Fecha Captura': item.fechaCaptura || '',
           'Tema / Actividad': item.tema || '',
           'Institución': item.institucion || '',
           'Lugar': item.lugar || '',
-          'Fecha': item.fechaActividad || '',
+          'Fecha Actividad': item.fechaActividad || '',
           'Población Objetivo': item.poblacion || '',
+          'Canalización': item.referencia || '',
           'Total Hombres': item.totalHombres || 0,
           'Total Mujeres': item.totalMujeres || 0,
           'Total Asistentes': item.granTotal || 0
@@ -1260,30 +1694,30 @@
         htmlRows = `
           <thead>
             <tr>
-              <th style="width: 40px; text-align: center;">No.</th>
-              <th>Expediente / Tema</th>
+              <th style="width: 40px; text-align: center;">No. Inc.</th>
+              <th>Expediente / F. Captura</th>
               <th>NNA / Tutor</th>
+              <th>Canalización</th>
               <th style="text-align: center;">Estatus</th>
-              <th style="text-align: center;">Evidencias</th>
             </tr>
           </thead>
           <tbody>`;
-        documentosFiltradosCache.forEach((item, idx) => {
+        documentosFiltradosCache.forEach((item) => {
           htmlRows += `
             <tr>
-              <td style="text-align: center; font-weight: bold;">${idx + 1}</td>
+              <td style="text-align: center; font-weight: bold;">${item.noIncremento || 'S/N'}</td>
               <td>
                 <div style="font-family: monospace; font-weight: bold;">${item.noExpediente || ''}</div>
-                <div style="font-size: 10px; color: #475569;">${item.tema || ''}</div>
+                <div style="font-size: 10px; color: #475569;">Cap: ${item.fechaCaptura || ''}</div>
               </td>
               <td>
                 <div style="font-weight: bold;">${item.nombreNna || ''}</div>
                 <div style="font-size: 10px; color: #475569;">Tutor: ${item.nombreTutor || ''}</div>
               </td>
+              <td>${item.referencia || ''}</td>
               <td style="text-align: center;">
                 <span style="background-color: #fef3c7; color: #78350f; padding: 2px 8px; border-radius: 9999px; font-size: 10px; font-weight: bold;">${item.estatus || ''}</span>
               </td>
-              <td style="text-align: center;">${(item.fotos || []).length} Fotos</td>
             </tr>`;
         });
         htmlRows += `</tbody>`;
@@ -1291,32 +1725,24 @@
         htmlRows = `
           <thead>
             <tr>
-              <th style="width: 40px; text-align: center;">No.</th>
+              <th style="width: 40px; text-align: center;">No. Inc.</th>
               <th>Tema / Institución</th>
-              <th>Lugar / Fecha</th>
+              <th>Canalización</th>
               <th style="text-align: center;">Asistentes</th>
-              <th style="text-align: center;">Evidencias Y Listas</th>
             </tr>
           </thead>
           <tbody>`;
-        documentosFiltradosCache.forEach((item, idx) => {
+        documentosFiltradosCache.forEach((item) => {
           htmlRows += `
             <tr>
-              <td style="text-align: center; font-weight: bold;">${idx + 1}</td>
+              <td style="text-align: center; font-weight: bold;">${item.noIncremento || 'S/N'}</td>
               <td>
                 <div style="font-weight: bold;">${item.tema || ''}</div>
-                <div style="font-size: 10px; color: #475569;">${item.institucion || ''}</div>
+                <div style="font-size: 10px; color: #475569;">${item.institucion || ''} (${item.lugar || ''})</div>
               </td>
-              <td>
-                <div>${item.lugar || ''}</div>
-                <div style="font-size: 10px; color: #475569;">${item.fechaActividad || ''}</div>
-              </td>
+              <td>${item.referencia || 'General'}</td>
               <td style="text-align: center; font-weight: bold;">
                 ${item.granTotal || 0} <span style="font-size: 10px; font-weight: normal; color: #475569;">(${item.totalHombres || 0}H / ${item.totalMujeres || 0}M)</span>
-              </td>
-              <td style="text-align: center; font-size: 10px;">
-                <div>${(item.fotos || []).length} Fotos</div>
-                <div>${(item.listas || []).length} Listas</div>
               </td>
             </tr>`;
         });
